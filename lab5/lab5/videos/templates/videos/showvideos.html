@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multiple Videos Found</title>
+</head>
+<body>
+    <h1>Multiple Videos Found</h1>
+    <ul>
+        {% for video in videos %}
+            <li>
+                <h2>{{ video.title }}</h2>
+                <p>{{ video.description }}</p>
+                <video src="{{ video.url }}" controls></video>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

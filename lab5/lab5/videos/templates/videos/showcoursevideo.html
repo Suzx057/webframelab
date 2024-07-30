@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ course.name }}</title>
+</head>
+<body>
+    <h1>{{ course.name }}</h1>
+    <ul>
+        {% for video in videos %}
+            <li>
+                <h2>{{ video.title }}</h2>
+                <video src="{{ video.url }}" controls></video>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
