@@ -1,0 +1,20 @@
+<!-- authors/templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}My Site{% endblock %}</title>
+</head>
+<body>
+    <div id="sidebar">
+        <a href="{% url 'author_formset' %}">Author Formset</a>
+        <a href="{% url 'author_list' %}">Author List</a>
+        <a href="{% url 'author_video' %}">Author Videos</a>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

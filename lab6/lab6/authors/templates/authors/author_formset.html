@@ -1,0 +1,17 @@
+<!-- authors/templates/authors/author_formset.html -->
+
+{% extends "base.html" %}
+
+{% block title %}Author Formset{% endblock %}
+
+{% block content %}
+<h1>Author Formset</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    {% for form in formset %}
+        {{ form.as_p }}
+    {% endfor %}
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
