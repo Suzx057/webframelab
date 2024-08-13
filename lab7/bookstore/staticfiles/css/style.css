@@ -1,0 +1,19 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+header, nav, main, footer {
+    text-align: center;
+    margin: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+button {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h2>Book List</h2>
+    <ul>
+    {% for book in books %}
+        <li>
+            {% if book.cover_image %}
+                <img src="{{ book.cover_image.url }}" alt="{{ book.title }}">
+            {% else %}
+                <img src="{% static 'images/default_cover.jpg' %}" alt="Default cover">
+            {% endif %}
+            <h3>{{ book.title }}</h3>
+            <p>Author: {{ book.author.name }}</p>
+            <p>Category: {{ book.category }}</p>
+            <p>Price: {{ book.saleprice }}</p>
+            {% if book.saleprice == 0 %}
+                <button class="free-button">Free</button>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
