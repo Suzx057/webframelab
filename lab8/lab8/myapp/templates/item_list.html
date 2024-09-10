@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item List</title>
+    <script>
+      
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('http://127.0.0.1:8000/api/items/')
+                .then(response => response.json())
+                .then(data => {
+                    
+                    let output = '<h2>Item List</h2><ul>';
+                    data.forEach(item => {
+                        output += `<li>${item.name}: ${item.description}</li>`;
+                    });
+                    output += '</ul>';
+                    document.getElementById('item-list').innerHTML = output;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</head>
+<body>
+    <h1>Items</h1>
+    <div id="item-list">Loading...</div>
+</body>
+</html>
