@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 
 
 
+from django.contrib.sessions.models import Session
+
 def login_view(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -12,12 +14,16 @@ def login_view(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
 
-            # ใช้ฟังก์ชัน authenticate เพื่อตรวจสอบผู้ใช้และรหัสผ่าน
+            # ตรวจสอบผู้ใช้และรหัสผ่าน
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 # ล็อกอินผู้ใช้และสร้างเซสชัน
                 login(request, user)
-                return redirect('show_videos')  # เปลี่ยนเส้นทางตามที่คุณต้องการ
+
+                # เพิ่ม session_key ลงในเซสชัน
+                request.session['session_key'] = request.session.session_key
+                
+                return redirect('show_videos')
             else:
                 return render(request, 'login.html', {'form': form, 'error': 'Invalid credentials'})
     else:
@@ -37,4 +43,7 @@ def logout_view(request):
 def show_videos(request):
     # ดึงข้อมูลชื่อผู้ใช้จากผู้ใช้ที่ล็อกอินอยู่
     username = request.user.username
-    return render(request, 'videos.html', {'username': username})
+    # ดึงค่า session_key
+    session_key = request.session.get('session_key', 'No session key available')
+    
+    return render(request, 'videos.html', {'username': username, 'session_key': session_key})
